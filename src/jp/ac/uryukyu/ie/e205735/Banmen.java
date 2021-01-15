@@ -1,16 +1,21 @@
 package jp.ac.uryukyu.ie.e205735;
+import java.util.Scanner;
 
 public class Banmen {
     private int MASU;
-    private String[][] masus;
+    private String[][] boxStatus;
+    private int BALL= 3;
+    private int choiceNumber;
+    private char choiceEiji;
+    private int changeInt;
 
     Banmen(int masu){
         MASU = masu;
-        masus = new String[MASU][MASU];
+        boxStatus = new String[MASU][MASU];
 
         for (int j = 0; j < MASU ; j++){
             for (int i = 0; i< MASU ; i++){
-                masus[i][j] = "□";
+                boxStatus[i][j] = "□";
             }
         }
     }
@@ -39,7 +44,7 @@ public class Banmen {
             System.out.print(j+" | ");
             System.out.print(yokoyouso1[j]+" ");
             for (int i = 0; i< MASU ; i++){
-                System.out.print(getMasus()[j][i]+" ");
+                System.out.print(getBoxStatus()[j][i]+" ");
                 //System.out.print(nihongo[j]+" ");
                 //nihongo[j]++;
             }
@@ -59,12 +64,26 @@ public class Banmen {
         System.out.println();
     }
 
-    public void setMasus(int tate,int yoko){
-        masus[tate][yoko] = "●";
-        //return masus;
+    public void receiveAnswer(){
+        Scanner scanner = new Scanner(System.in);
+
+        for(int i = 0; i<BALL; i++){
+            System.out.println((i+1) + "つ目のボールの位置を選択してください");
+            System.out.print("数字（0~4）を入力：");
+            choiceNumber = scanner.nextInt();
+            System.out.print("アルファベット（a~e）を入力：");
+            choiceEiji = scanner.next().charAt(0);
+            changeInt = choiceEiji - 'a';
+            setBoxStatus(choiceNumber, changeInt);
+        }
     }
 
-    public String[][] getMasus(){
-        return masus;
+    public void setBoxStatus(int tate,int yoko){
+        this.boxStatus[tate][yoko] = "●";
+        //return boxStatus;
+    }
+
+    public String[][] getBoxStatus(){
+        return boxStatus;
     }
 }
