@@ -1,5 +1,6 @@
 package jp.ac.uryukyu.ie.e205735;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class GameMaster {
     private int MASU;
@@ -9,11 +10,19 @@ public class GameMaster {
     private char choiceEiji;
     private int changeInt;
     private Field ban;
+    private FieldAnswer banAns;
 
     GameMaster(int masu){
         this.MASU = masu;
         ban = new Field(this.MASU);
-                            //↑5
+        banAns = new FieldAnswer(this.MASU);
+        banAns.ballInstallation();
+        for(int i=0; i<5; i++){
+            for(int j=0; j<5; j++){
+                System.out.print(banAns.getBallAnswer(i,j));
+            }
+            System.out.println();
+        }
     }
 
     public void fieldStatus(){
@@ -39,13 +48,13 @@ public class GameMaster {
         String[] leftLasers = {"3","1","H","R","H"};
         String[] rightLasers = {"3","2","H","4","H"};
 
-        for (int j = 0; j < MASU ; j++){
-            System.out.print(j+" | ");
-            System.out.print(leftLasers[j]+" ");
-            for (int i = 0; i< MASU ; i++){
-                System.out.print(ban.getBoxStatus()[j][i]+" ");
+        for (int tate = 0; tate < MASU ; tate++){
+            System.out.print(tate+" | ");
+            System.out.print(leftLasers[tate]+" ");
+            for (int yoko = 0; yoko< MASU ; yoko++){
+                System.out.print(ban.getBoxStatus()[tate][yoko]+" ");
             }
-            System.out.print(rightLasers[j]+" ");
+            System.out.print(rightLasers[tate]+" ");
             System.out.println();
         }
 
@@ -75,6 +84,14 @@ public class GameMaster {
         }
     }
 
+    public void compareBallPosition(){
+        if(Arrays.deepEquals(banAns.getBallAnswer(),ban.getBoxStatus())){
+            System.out.println("GAME COMPLETED !!");
+        }else{
+            System.out.println("GAME OVER !!");
+        }
+
+    }
 
 
 }

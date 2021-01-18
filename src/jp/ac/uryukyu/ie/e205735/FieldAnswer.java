@@ -8,7 +8,7 @@ public class FieldAnswer {
 
     private int MASU;
     private int BALL= 3;
-    String[][] ballAnswer;
+    private String[][] ballAnswer;
 
     FieldAnswer(int masu){
         this.MASU = masu;
@@ -16,16 +16,16 @@ public class FieldAnswer {
     }
 
     public void ballInstallation(){
-        ArrayList<HavingTwoNumber> b = new ArrayList<HavingTwoNumber>();
+        ArrayList<HavingTwoNumber> list1 = new ArrayList<HavingTwoNumber>();
         for(int i=0; i<MASU; i++){
             for(int j=0; j<MASU; j++){
-                b.add(twoNumberInOneBag(i,j));
+                list1.add(twoNumberInOneBag(i,j));
                 this.ballAnswer[i][j] = "□";
             }
         }
-        Collections.shuffle(b);
+        Collections.shuffle(list1);
         for(int i=0; i<BALL; i++){
-            this.ballAnswer[b.get(i).tate][b.get(i).yoko] = "●";
+            this.ballAnswer[list1.get(i).tate][list1.get(i).yoko] = "●";
         }
     }
 
@@ -34,6 +34,14 @@ public class FieldAnswer {
         bag.tate = _num1;
         bag.yoko = _num2;
         return bag;
+    }
+
+    public String[][] getBallAnswer(){
+        return this.ballAnswer;
+    }
+
+    public String getBallAnswer(int tate,int yoko){
+        return this.ballAnswer[tate][yoko];
     }
 
 }

@@ -24,6 +24,10 @@ public class Field {
         return boxStatus;
     }
 
+    public String getBoxStatus(int tate, int yoko){
+        return boxStatus[tate][yoko];
+    }
+
 
 
 
